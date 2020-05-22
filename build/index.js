@@ -18,37 +18,43 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-/* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
+var ActionSheet = function (_a) {
+    var show = _a.show, hideFunction = _a.hideFunction, children = _a.children, style = _a.style;
+    return (React.createElement("div", null,
+        React.createElement(Bg, { show: show, hideFunction: hideFunction }),
+        React.createElement(Sheet, { show: show, hideFunction: hideFunction, children: children, style: style })));
+};
+var Bg = function (_a) {
+    var show = _a.show, hideFunction = _a.hideFunction;
+    return (React.createElement("div", { onClick: function () { return hideFunction(); }, style: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backfaceVisibility: 'hidden',
+            background: 'rgba(0, 0, 0, 0.8)',
+            transition: 'all 0.5s ease',
+            opacity: show ? 1 : 0,
+            zIndex: show ? 98 : -1,
+        } }));
+};
+var Sheet = function (_a) {
+    var children = _a.children, show = _a.show, _b = _a.borderRadius, borderRadius = _b === void 0 ? 100 : _b, style = _a.style;
+    return React.createElement("div", { style: __assign({ overflowX: 'hidden', position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 99, minHeight: '60vh', maxHeight: '100vh', transition: "all 0.3s ease-in-out", backgroundColor: '#808080', transform: show ? "translate3d(0, 0, 0)" : "translate3d(0, 101%, 0)", borderTopLeftRadius: borderRadius, borderTopRightRadius: borderRadius }, style) }, children);
+};
 
-/**
- * @class ExampleComponent
- */
-var ExampleComponent = /** @class */ (function (_super) {
-    __extends(ExampleComponent, _super);
-    function ExampleComponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ExampleComponent.prototype.render = function () {
-        var text = this.props.text;
-        return React.createElement("div", { style: { color: "red" } },
-            "Hello ",
-            text);
-    };
-    return ExampleComponent;
-}(React.Component));
-
-exports.default = ExampleComponent;
+exports.default = ActionSheet;
 //# sourceMappingURL=index.js.map

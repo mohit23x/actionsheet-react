@@ -48,7 +48,7 @@ const Bg = ({ show, hideFunction }: BgProps): JSX.Element => {
     )
 };
 
-const Sheet = ({ children, show, borderRadius = 100, hideFunction, style }: ActionSheetProps): JSX.Element => {
+const Sheet = ({ children, show, borderRadius = 100, style }: ActionSheetProps): JSX.Element => {
     return <div
         style={{
             overflowX: 'hidden',

@@ -1,6 +1,6 @@
 {
   "name": "actionsheet-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An awesome react actionsheet component for the web",
   "main": "build/index.js",
   "module": "build/index.es.js",
