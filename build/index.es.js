@@ -48,8 +48,8 @@ var Bg = function (_a) {
         } }));
 };
 var Sheet = function (_a) {
-    var children = _a.children, show = _a.show, _b = _a.borderRadius, borderRadius = _b === void 0 ? 100 : _b, style = _a.style;
-    return createElement("div", { style: __assign({ overflowX: 'hidden', position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 99, minHeight: '60vh', maxHeight: '100vh', transition: "all 0.3s ease-in-out", backgroundColor: '#808080', transform: show ? "translate3d(0, 0, 0)" : "translate3d(0, 101%, 0)", borderTopLeftRadius: borderRadius, borderTopRightRadius: borderRadius }, style) }, children);
+    var children = _a.children, show = _a.show, _b = _a.borderRadius, borderRadius = _b === void 0 ? 16 : _b, style = _a.style;
+    return createElement("div", { style: __assign({ overflowX: 'hidden', position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 99, transition: "all 0.3s ease-in-out", backgroundColor: '#808080', transform: show ? "translate3d(0, 0, 0)" : "translate3d(0, 101%, 0)", borderTopLeftRadius: borderRadius, borderTopRightRadius: borderRadius }, style) }, children);
 };
 
 export default ActionSheet;

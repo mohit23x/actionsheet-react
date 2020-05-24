@@ -48,7 +48,7 @@ const Bg = ({ show, hideFunction }: BgProps): JSX.Element => {
     )
 };
 
-const Sheet = ({ children, show, borderRadius = 100, style }: ActionSheetProps): JSX.Element => {
+const Sheet = ({ children, show, borderRadius = 16, style }: ActionSheetProps): JSX.Element => {
     return <div
         style={{
             overflowX: 'hidden',
@@ -57,8 +57,6 @@ const Sheet = ({ children, show, borderRadius = 100, style }: ActionSheetProps):
             left: 0,
             width: '100%',
             zIndex: 99,
-            minHeight: '60vh',
-            maxHeight: '100vh',
             transition: "all 0.3s ease-in-out",
             backgroundColor: '#808080',
             transform: show ? "translate3d(0, 0, 0)" : "translate3d(0, 101%, 0)",
