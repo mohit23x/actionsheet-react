@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
+import './index.css';
 interface ActionSheetProps {
-    hideFunction: () => void;
-    show: boolean;
+    onHide: () => void;
     children?: ReactNode;
     borderRadius?: number;
-    style?: React.CSSProperties;
-    direction?: 'top' | 'down';
+    bgStyle?: React.CSSProperties;
+    sheetStyle?: React.CSSProperties;
+    mouseEnable?: boolean;
+    touchEnable?: boolean;
+    threshold?: number;
+    opacity?: number;
 }
-declare const ActionSheet: ({ show, hideFunction, children, style }: ActionSheetProps) => JSX.Element;
+declare const ActionSheet: React.ForwardRefExoticComponent<ActionSheetProps & React.RefAttributes<unknown>>;
 export default ActionSheet;
