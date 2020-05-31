@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { ReactNode, useState, useRef, useEffect, useImperativeHandle, Fragment } from 'react';
-import './index.css';
 
-interface ActionSheetProps {
+export interface ActionSheetProps {
     onHide: () => void
     children?: ReactNode
     borderRadius?: number
@@ -14,7 +13,12 @@ interface ActionSheetProps {
     opacity?: number
 }
 
-const ActionSheet = React.forwardRef(({ onHide, children, sheetStyle, bgStyle, mouseEnable=true, touchEnable=true, threshold=50, opacity=1 }:ActionSheetProps, ref):JSX.Element => {
+export interface ActionSheetRef {
+    open (): void
+    close (): void
+}
+
+const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({ onHide, children, sheetStyle, bgStyle, mouseEnable=true, touchEnable=true, threshold=50, opacity=1 }, ref):JSX.Element => {
     const [show, setShow] = useState(false);
     const [pressed, setPressed] = useState(false)
     const sheetRef = useRef<HTMLDivElement>(null);
@@ -23,10 +27,10 @@ const ActionSheet = React.forwardRef(({ onHide, children, sheetStyle, bgStyle, m
     const startY = useRef<number>(0);
 
     useImperativeHandle(ref, () => ({
-        show(){
+        open():void{
             setShow(true);
         },
-        hide(){
+        close():void{
             setShow(false);
         }
     }));
@@ -124,13 +128,34 @@ const ActionSheet = React.forwardRef(({ onHide, children, sheetStyle, bgStyle, m
         <Fragment>
         <div
             onClick={BgClick}
-            className="action-sheet-bg-m23x"
-            style={{...bgStyle, opacity: show ? opacity : 0, zIndex: show ? 998 : -1}}>
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.8)",
+                transition: "all 0.5s ease",
+                backfaceVisibility: "hidden",
+                ...bgStyle,
+                opacity: show ? opacity : 0,
+                zIndex: show ? 998 : -1}}>
         </div>
         <div
             ref={sheetRef}
-            className={`action-sheet-comp-sheet-m23x ${pressed ? 'action-sheet-transition-fix-m23x' : 'action-sheet-transition-m23x'}`}
-            style={{...sheetStyle}}
+            style={{
+                overflowX: "hidden",
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                zIndex: 999,
+                backgroundColor: '#fbfbfb',
+                borderTopLeftRadius: 16,
+                borderTopRightRadius: 16,
+                transform: "translate3d(0, 101%, 0)",              
+                ...sheetStyle,
+                transition: pressed ? "all 0.05s linear" : "all 0.3s ease-in-out" }}
             onMouseDown={mouseEnable? onMouseStart : undefined}
             onMouseMove={mouseEnable? onMouseMove : undefined}
             onMouseUp={mouseEnable ? onSwipeEnd: undefined}
@@ -143,5 +168,5 @@ const ActionSheet = React.forwardRef(({ onHide, children, sheetStyle, bgStyle, m
     )
 });
 
-
+const ActionSheet = React.forwardRef(Comp);
 export default ActionSheet;

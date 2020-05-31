@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import './index.css';
-interface ActionSheetProps {
+export interface ActionSheetProps {
     onHide: () => void;
     children?: ReactNode;
     borderRadius?: number;
@@ -12,5 +11,9 @@ interface ActionSheetProps {
     threshold?: number;
     opacity?: number;
 }
-declare const ActionSheet: React.ForwardRefExoticComponent<ActionSheetProps & React.RefAttributes<unknown>>;
+export interface ActionSheetRef {
+    open(): void;
+    close(): void;
+}
+declare const ActionSheet: React.ForwardRefExoticComponent<ActionSheetProps & React.RefAttributes<ActionSheetRef>>;
 export default ActionSheet;

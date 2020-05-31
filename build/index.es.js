@@ -26,37 +26,7 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
-function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') { return; }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css_248z = ".index_action-sheet-bg-m23x__2GsZt {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: rgba(0, 0, 0, 0.8);\r\n  transition: all 0.5s ease;\r\n  backface-visibility: hidden;\r\n}\r\n.index_action-sheet-comp-sheet-m23x__MgQTM {\r\n  overflow-x: hidden;\r\n  position: fixed;\r\n  bottom: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  z-index: 999;\r\n  background-color: #fbfbfb;\r\n  border-top-left-radius: 16px;\r\n  border-top-right-radius: 16px;\r\n  transform: translate3d(0, 101%, 0);\r\n}\r\n.index_action-sheet-transition-m23x__1JEE9 {\r\n  transition: all 0.3s ease-in-out;\r\n}\r\n.index_action-sheet-transition-fix-m23x__1gT1L {\r\n  transition: all 0.05s linear;\r\n}\r\n";
-styleInject(css_248z);
-
-var ActionSheet = forwardRef(function (_a, ref) {
+var Comp = (function (_a, ref) {
     var onHide = _a.onHide, children = _a.children, sheetStyle = _a.sheetStyle, bgStyle = _a.bgStyle, _b = _a.mouseEnable, mouseEnable = _b === void 0 ? true : _b, _c = _a.touchEnable, touchEnable = _c === void 0 ? true : _c, _d = _a.threshold, threshold = _d === void 0 ? 50 : _d, _e = _a.opacity, opacity = _e === void 0 ? 1 : _e;
     var _f = useState(false), show = _f[0], setShow = _f[1];
     var _g = useState(false), pressed = _g[0], setPressed = _g[1];
@@ -65,10 +35,10 @@ var ActionSheet = forwardRef(function (_a, ref) {
     var masterOffset = useRef(0);
     var startY = useRef(0);
     useImperativeHandle(ref, function () { return ({
-        show: function () {
+        open: function () {
             setShow(true);
         },
-        hide: function () {
+        close: function () {
             setShow(false);
         }
     }); });
@@ -154,9 +124,10 @@ var ActionSheet = forwardRef(function (_a, ref) {
         masterOffset.current = 0;
     };
     return (createElement(Fragment, null,
-        createElement("div", { onClick: BgClick, className: "action-sheet-bg-m23x", style: __assign(__assign({}, bgStyle), { opacity: show ? opacity : 0, zIndex: show ? 998 : -1 }) }),
-        createElement("div", { ref: sheetRef, className: "action-sheet-comp-sheet-m23x " + (pressed ? 'action-sheet-transition-fix-m23x' : 'action-sheet-transition-m23x'), style: __assign({}, sheetStyle), onMouseDown: mouseEnable ? onMouseStart : undefined, onMouseMove: mouseEnable ? onMouseMove : undefined, onMouseUp: mouseEnable ? onSwipeEnd : undefined, onTouchStart: touchEnable ? onSwipeStart : undefined, onTouchMove: touchEnable ? onSwipeMove : undefined, onTouchEnd: touchEnable ? onSwipeEnd : undefined }, children ? children : createElement("div", { style: { height: 100 } }))));
+        createElement("div", { onClick: BgClick, style: __assign(__assign({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0, 0, 0, 0.8)", transition: "all 0.5s ease", backfaceVisibility: "hidden" }, bgStyle), { opacity: show ? opacity : 0, zIndex: show ? 998 : -1 }) }),
+        createElement("div", { ref: sheetRef, style: __assign(__assign({ overflowX: "hidden", position: "fixed", bottom: 0, left: 0, width: "100%", zIndex: 999, backgroundColor: '#fbfbfb', borderTopLeftRadius: 16, borderTopRightRadius: 16, transform: "translate3d(0, 101%, 0)" }, sheetStyle), { transition: pressed ? "all 0.05s linear" : "all 0.3s ease-in-out" }), onMouseDown: mouseEnable ? onMouseStart : undefined, onMouseMove: mouseEnable ? onMouseMove : undefined, onMouseUp: mouseEnable ? onSwipeEnd : undefined, onTouchStart: touchEnable ? onSwipeStart : undefined, onTouchMove: touchEnable ? onSwipeMove : undefined, onTouchEnd: touchEnable ? onSwipeEnd : undefined }, children ? children : createElement("div", { style: { height: 100 } }))));
 });
+var ActionSheet = forwardRef(Comp);
 
 export default ActionSheet;
 //# sourceMappingURL=index.es.js.map
