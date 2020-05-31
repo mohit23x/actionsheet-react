@@ -1,7 +1,7 @@
 {
   "name": "actionsheet-react",
-  "version": "1.0.5",
-  "description": "An awesome react actionsheet component for the web",
+  "version": "1.0.6",
+  "description": "🌟An awesome react actionsheet component for the web",
   "main": "build/index.js",
   "module": "build/index.es.js",
   "jsnext:main": "build/index.es.js",
@@ -41,5 +41,6 @@
     "sheet"
   ],
   "author": "mohit23x",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/mohit23x/actionsheet-react"
 }

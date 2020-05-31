@@ -2,15 +2,16 @@ import * as React from 'react';
 import { ReactNode, useState, useRef, useEffect, useImperativeHandle, Fragment } from 'react';
 
 export interface ActionSheetProps {
-    onHide: () => void
+    onClose?: () => void
     children?: ReactNode
-    borderRadius?: number
     bgStyle?: React.CSSProperties
     sheetStyle?: React.CSSProperties
     mouseEnable?: boolean
     touchEnable?: boolean
     threshold?: number
     opacity?: number
+    zIndex?: number
+    closeOnBgTap?: boolean
 }
 
 export interface ActionSheetRef {
@@ -18,7 +19,7 @@ export interface ActionSheetRef {
     close (): void
 }
 
-const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({ onHide, children, sheetStyle, bgStyle, mouseEnable=true, touchEnable=true, threshold=50, opacity=1 }, ref):JSX.Element => {
+const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({ onClose, children, sheetStyle, bgStyle, mouseEnable=true, touchEnable=true, threshold=50, opacity=1, zIndex=998, closeOnBgTap=true }, ref):JSX.Element => {
     const [show, setShow] = useState(false);
     const [pressed, setPressed] = useState(false)
     const sheetRef = useRef<HTMLDivElement>(null);
@@ -45,7 +46,7 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
 
     const BgClick = ():void => {
         setShow(false);
-        if(onHide) onHide();
+        if(onClose) onClose();
     }
 
     const requestSheetDown = ():boolean => {
@@ -117,7 +118,7 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
         setPressed(false);
         if(masterOffset.current > threshold){
             setShow(false);
-            if(onHide) onHide();
+            if(onClose) onClose();
         }else{
             requestSheetUp();
         }
@@ -127,7 +128,7 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
     return (
         <Fragment>
         <div
-            onClick={BgClick}
+            onClick={closeOnBgTap? BgClick : undefined}
             style={{
                 position: 'fixed',
                 top: 0,
@@ -139,7 +140,7 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
                 backfaceVisibility: "hidden",
                 ...bgStyle,
                 opacity: show ? opacity : 0,
-                zIndex: show ? 998 : -1}}>
+                zIndex: show ? zIndex : -1}}>
         </div>
         <div
             ref={sheetRef}
@@ -149,12 +150,12 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
                 bottom: 0,
                 left: 0,
                 width: "100%",
-                zIndex: 999,
                 backgroundColor: '#fbfbfb',
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
-                transform: "translate3d(0, 101%, 0)",              
+                transform: "translate3d(0, 101%, 0)",
                 ...sheetStyle,
+                zIndex: zIndex + 1,
                 transition: pressed ? "all 0.05s linear" : "all 0.3s ease-in-out" }}
             onMouseDown={mouseEnable? onMouseStart : undefined}
             onMouseMove={mouseEnable? onMouseMove : undefined}
