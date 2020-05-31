@@ -12,15 +12,21 @@ Action Sheet is a component that slides in from bottom and has some list of acti
 
 [code-sandbox link](https://codesandbox.io/s/actionsheet-react-2s5zf)
 
+
 ### 📦 Installation
+
 ##### using npm
+
 ```bash
 npm i actionsheet-react
 ```
+
 ##### using yarn
+
 ```bash
 yarn add actionsheet-react
 ```
+
 
 ### 👨‍💻 Usage
 
@@ -84,7 +90,9 @@ const MyComponent = () => {
 ```
 
 ### 🌮 Props
+
  ##### all props are optional
+
 | property name | type | more info |
 | --- | --- | --- |
 | onClose | callback function | called when the actionsheet is closed |
@@ -97,7 +105,9 @@ const MyComponent = () => {
 | zIndex | number | the default value is **999** |
 | closeOnBgTap | Boolean | if true, the sheet is closed when the backgroud overlay is tapped |
 
+
 ### 👾 Misc
+
 1. The logic to stop the backgroud from scrolling is not implemented in this package just to keep it simple. To avoid the background from scrolling you can toggle the overflow property of the body tag, you can also use some other way of your choice
 
 ```javascript
@@ -115,6 +125,3 @@ body{
 
 ### ⛳ Issues/Feature Request/Pull Request
 The github repo is always there for you.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)

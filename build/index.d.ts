@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 export interface ActionSheetProps {
-    onHide: () => void;
+    onClose?: () => void;
     children?: ReactNode;
-    borderRadius?: number;
     bgStyle?: React.CSSProperties;
     sheetStyle?: React.CSSProperties;
     mouseEnable?: boolean;
     touchEnable?: boolean;
     threshold?: number;
     opacity?: number;
+    zIndex?: number;
+    closeOnBgTap?: boolean;
 }
 export interface ActionSheetRef {
     open(): void;
