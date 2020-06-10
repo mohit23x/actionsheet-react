@@ -12,6 +12,8 @@ export interface ActionSheetProps {
     opacity?: number
     zIndex?: number
     closeOnBgTap?: boolean
+    bgTransition?: string
+    sheetTransition?: string
 }
 
 export interface ActionSheetRef {
@@ -19,7 +21,20 @@ export interface ActionSheetRef {
     close (): void
 }
 
-const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({ onClose, children, sheetStyle, bgStyle, mouseEnable=true, touchEnable=true, threshold=50, opacity=1, zIndex=998, closeOnBgTap=true }, ref):JSX.Element => {
+const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
+    onClose,
+    children,
+    sheetStyle,
+    bgStyle,
+    mouseEnable = true,
+    touchEnable = true,
+    threshold = 50,
+    opacity = 1,
+    zIndex = 998,
+    closeOnBgTap = true,
+    bgTransition = "all 0.5s ease-in-out",
+    sheetTransition="all 0.3s ease-in-out"
+    }, ref): JSX.Element => {
     const [show, setShow] = useState(false);
     const [pressed, setPressed] = useState(false)
     const sheetRef = useRef<HTMLDivElement>(null);
@@ -136,9 +151,9 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
                 right: 0,
                 bottom: 0,
                 background: "rgba(0, 0, 0, 0.8)",
-                transition: "all 0.5s ease",
                 backfaceVisibility: "hidden",
                 ...bgStyle,
+                transition: bgTransition,
                 opacity: show ? opacity : 0,
                 zIndex: show ? zIndex : -1}}>
         </div>
@@ -156,14 +171,14 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
                 transform: "translate3d(0, 101%, 0)",
                 ...sheetStyle,
                 zIndex: zIndex + 1,
-                transition: pressed ? "all 0.05s linear" : "all 0.3s ease-in-out" }}
+                transition: pressed ? "all 0.05s linear" : sheetTransition }}
             onMouseDown={mouseEnable? onMouseStart : undefined}
             onMouseMove={mouseEnable? onMouseMove : undefined}
             onMouseUp={mouseEnable ? onSwipeEnd: undefined}
             onTouchStart={touchEnable? onSwipeStart: undefined}
             onTouchMove={touchEnable? onSwipeMove: undefined}
             onTouchEnd={touchEnable? onSwipeEnd: undefined}>
-                {children? children : <div style={{height: 100}} />}
+                {children? children : <div style={{height: 150}} />}
         </div>
         </Fragment>
     )

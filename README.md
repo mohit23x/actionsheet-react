@@ -1,7 +1,7 @@
 # ActionSheet-React
 
 [![Size](https://badgen.net/bundlephobia/minzip/actionsheet-react)](https://bundlephobia.com/result?p=actionsheet-react)
-[![npm](https://badgen.net//npm/v/actionsheet-react)](https://bundlephobia.com/result?p=actionsheet-react)
+[![npm](https://badgen.net//npm/v/actionsheet-react)](https://www.npmjs.com/package/actionsheet-react)
 
 An action sheet component for react.
 
@@ -10,8 +10,11 @@ Action Sheet is a component that slides in from bottom and has some list of acti
 
 ### 📺 Demo 
 
-[code-sandbox link](https://codesandbox.io/s/actionsheet-react-2s5zf)
+![demo gif](https://s7.gifyu.com/images/demo_action_sheet.gif)
 
+[code-sandbox simple example](https://codesandbox.io/s/actionsheet-react-2s5zf)
+
+[code-sandbox complex example](https://codesandbox.io/s/actionsheet-react-example-1-0nok0)
 
 ### 📦 Installation
 
@@ -103,19 +106,20 @@ const MyComponent = () => {
 | touchEnable | boolean | if true, the sheet can be swiped down on touch devices |
 | threshold | number | the minimum distance dragged, so that sheet will slide down. Threshold is measured in **px** , default value is 50 |
 | zIndex | number | the default value is **999** |
-| closeOnBgTap | Boolean | if true, the sheet is closed when the backgroud overlay is tapped |
-
+| closeOnBgTap | boolean | if true, the sheet is closed when the backgroud overlay is tapped |
+| sheetTransition | string | css transition shorthand, default value `all 0.3s ease-in-out` |
+| bgTransition | string | css transition shorthand, default value `all 0.5s ease-in-out` |
 
 ### 👾 Misc
 
-1. The logic to stop the backgroud from scrolling is not implemented in this package just to keep it simple. To avoid the background from scrolling you can toggle the overflow property of the body tag, you can also use some other way of your choice
+1. The logic to stop the backgroud from scrolling is not implemented in this package just to keep it simple. To avoid the background from scrolling you can toggle the overflow property of the body tag, or you can also use some other way of your choice
 
 ```javascript
     document.body.style.overflow = 'hidden'
     document.body.style.overflow = 'auto'
 ```
 
-2. Mobile browsers generally have pull-to-refresh and when out bottom sheet is open and user drags the sheet down but eventually the browser detects the swipe down gesture and triggers its pull-to-refresh. To control this behavior in Chrome i did this
+2. Mobile browsers generally have pull-to-refresh and when action sheet is open and when user drags the sheet down the pull-to-refresh is triggered. To control this behavior either you can disable swipe in action sheet `touchEnable={false}` or you can disable pull-to-refresh.
 
 ```css
 body{

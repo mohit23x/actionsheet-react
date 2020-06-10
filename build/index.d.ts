@@ -11,6 +11,8 @@ export interface ActionSheetProps {
     opacity?: number;
     zIndex?: number;
     closeOnBgTap?: boolean;
+    bgTransition?: string;
+    sheetTransition?: string;
 }
 export interface ActionSheetRef {
     open(): void;

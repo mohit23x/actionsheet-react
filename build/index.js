@@ -31,9 +31,9 @@ var __assign = function() {
 };
 
 var Comp = (function (_a, ref) {
-    var onClose = _a.onClose, children = _a.children, sheetStyle = _a.sheetStyle, bgStyle = _a.bgStyle, _b = _a.mouseEnable, mouseEnable = _b === void 0 ? true : _b, _c = _a.touchEnable, touchEnable = _c === void 0 ? true : _c, _d = _a.threshold, threshold = _d === void 0 ? 50 : _d, _e = _a.opacity, opacity = _e === void 0 ? 1 : _e, _f = _a.zIndex, zIndex = _f === void 0 ? 998 : _f, _g = _a.closeOnBgTap, closeOnBgTap = _g === void 0 ? true : _g;
-    var _h = React.useState(false), show = _h[0], setShow = _h[1];
-    var _j = React.useState(false), pressed = _j[0], setPressed = _j[1];
+    var onClose = _a.onClose, children = _a.children, sheetStyle = _a.sheetStyle, bgStyle = _a.bgStyle, _b = _a.mouseEnable, mouseEnable = _b === void 0 ? true : _b, _c = _a.touchEnable, touchEnable = _c === void 0 ? true : _c, _d = _a.threshold, threshold = _d === void 0 ? 50 : _d, _e = _a.opacity, opacity = _e === void 0 ? 1 : _e, _f = _a.zIndex, zIndex = _f === void 0 ? 998 : _f, _g = _a.closeOnBgTap, closeOnBgTap = _g === void 0 ? true : _g, _h = _a.bgTransition, bgTransition = _h === void 0 ? "all 0.5s ease-in-out" : _h, _j = _a.sheetTransition, sheetTransition = _j === void 0 ? "all 0.3s ease-in-out" : _j;
+    var _k = React.useState(false), show = _k[0], setShow = _k[1];
+    var _l = React.useState(false), pressed = _l[0], setPressed = _l[1];
     var sheetRef = React.useRef(null);
     var animationRef = React.useRef(0);
     var masterOffset = React.useRef(0);
@@ -128,8 +128,8 @@ var Comp = (function (_a, ref) {
         masterOffset.current = 0;
     };
     return (React.createElement(React.Fragment, null,
-        React.createElement("div", { onClick: closeOnBgTap ? BgClick : undefined, style: __assign(__assign({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0, 0, 0, 0.8)", transition: "all 0.5s ease", backfaceVisibility: "hidden" }, bgStyle), { opacity: show ? opacity : 0, zIndex: show ? zIndex : -1 }) }),
-        React.createElement("div", { ref: sheetRef, style: __assign(__assign({ overflowX: "hidden", position: "fixed", bottom: 0, left: 0, width: "100%", backgroundColor: '#fbfbfb', borderTopLeftRadius: 16, borderTopRightRadius: 16, transform: "translate3d(0, 101%, 0)" }, sheetStyle), { zIndex: zIndex + 1, transition: pressed ? "all 0.05s linear" : "all 0.3s ease-in-out" }), onMouseDown: mouseEnable ? onMouseStart : undefined, onMouseMove: mouseEnable ? onMouseMove : undefined, onMouseUp: mouseEnable ? onSwipeEnd : undefined, onTouchStart: touchEnable ? onSwipeStart : undefined, onTouchMove: touchEnable ? onSwipeMove : undefined, onTouchEnd: touchEnable ? onSwipeEnd : undefined }, children ? children : React.createElement("div", { style: { height: 100 } }))));
+        React.createElement("div", { onClick: closeOnBgTap ? BgClick : undefined, style: __assign(__assign({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0, 0, 0, 0.8)", backfaceVisibility: "hidden" }, bgStyle), { transition: bgTransition, opacity: show ? opacity : 0, zIndex: show ? zIndex : -1 }) }),
+        React.createElement("div", { ref: sheetRef, style: __assign(__assign({ overflowX: "hidden", position: "fixed", bottom: 0, left: 0, width: "100%", backgroundColor: '#fbfbfb', borderTopLeftRadius: 16, borderTopRightRadius: 16, transform: "translate3d(0, 101%, 0)" }, sheetStyle), { zIndex: zIndex + 1, transition: pressed ? "all 0.05s linear" : sheetTransition }), onMouseDown: mouseEnable ? onMouseStart : undefined, onMouseMove: mouseEnable ? onMouseMove : undefined, onMouseUp: mouseEnable ? onSwipeEnd : undefined, onTouchStart: touchEnable ? onSwipeStart : undefined, onTouchMove: touchEnable ? onSwipeMove : undefined, onTouchEnd: touchEnable ? onSwipeEnd : undefined }, children ? children : React.createElement("div", { style: { height: 150 } }))));
 });
 var ActionSheet = React.forwardRef(Comp);
 

@@ -1,7 +1,7 @@
 {
   "name": "actionsheet-react",
-  "version": "1.0.8",
-  "description": "🌟An awesome react actionsheet component for the web",
+  "version": "1.0.9",
+  "description": "🌟A lightweight and flexible action sheet component for the web",
   "main": "build/index.js",
   "module": "build/index.es.js",
   "jsnext:main": "build/index.es.js",
@@ -31,12 +31,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react",
+    "react panel",
     "actionsheet",
-    "web",
-    "action",
-    "bottom",
-    "sheet"
+    "bottom sheet",
+    "slide up panel"
   ],
   "author": "mohit23x",
   "license": "ISC",
