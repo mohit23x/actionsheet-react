@@ -14,6 +14,7 @@ export interface ActionSheetProps {
     closeOnBgTap?: boolean
     bgTransition?: string
     sheetTransition?: string
+    reverse?: boolean;
 }
 
 export interface ActionSheetRef {
@@ -33,7 +34,8 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
     zIndex = 998,
     closeOnBgTap = true,
     bgTransition = "all 0.5s ease-in-out",
-    sheetTransition="all 0.3s ease-in-out"
+    sheetTransition="all 0.3s ease-in-out",
+    reverse = false,
     }, ref): JSX.Element => {
     const [show, setShow] = useState(false);
     const [pressed, setPressed] = useState(false)
@@ -66,7 +68,7 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
 
     const requestSheetDown = ():boolean => {
         if (null !== sheetRef.current) {
-            sheetRef.current.style.transform = `translate3d(0, 101%, 0)`;
+            sheetRef.current.style.transform = reverse ? 'translate3d(0, -101%, 0)' : 'translate3d(0, 101%, 0)';
             return true;
         }
         return false;
@@ -162,13 +164,20 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
             style={{
                 overflowX: "hidden",
                 position: "fixed",
-                bottom: 0,
+                ...(reverse ?
+                    {
+                        top: 0,
+                        transform: 'translate3d(0, -101%, 0)',
+                      } :
+                    {
+                        bottom: 0,
+                        transform: 'translate3d(0, 101%, 0)',
+                      }),
                 left: 0,
                 width: "100%",
                 backgroundColor: '#fbfbfb',
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
-                transform: "translate3d(0, 101%, 0)",
                 ...sheetStyle,
                 zIndex: zIndex + 1,
                 transition: pressed ? "all 0.05s linear" : sheetTransition }}
