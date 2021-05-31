@@ -168,10 +168,14 @@ const Comp: React.RefForwardingComponent<ActionSheetRef, ActionSheetProps> = (({
                     {
                         top: 0,
                         transform: 'translate3d(0, -101%, 0)',
+                        borderBottomLeftRadius: 16,
+                        borderBottomRightRadius: 16,
                       } :
                     {
                         bottom: 0,
                         transform: 'translate3d(0, 101%, 0)',
+                        borderTopLeftRadius: 16,
+                        borderTopRightRadius: 16,
                       }),
                 left: 0,
                 width: "100%",
