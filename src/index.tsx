@@ -129,6 +129,7 @@ const ActionSheet = React.forwardRef<
       } else if (reverse && offset < 0) {
         masterOffset.current = offset;
         animationRef.current = requestAnimationFrame(updatePosition);
+        return true;
       }
       return false;
     };
@@ -217,12 +218,12 @@ const ActionSheet = React.forwardRef<
             zIndex: zIndex + 1,
             transition: pressed ? "transform 0.05s linear" : sheetTransition,
           }}
-          onMouseDown={mouseEnable ? onMouseStart : undefined}
-          onMouseMove={mouseEnable ? onMouseMove : undefined}
-          onMouseUp={mouseEnable ? onSwipeEnd : undefined}
-          onTouchStart={touchEnable ? onSwipeStart : undefined}
-          onTouchMove={touchEnable ? onSwipeMove : undefined}
-          onTouchEnd={touchEnable ? onSwipeEnd : undefined}
+          onMouseDown={mouseEnable ? onMouseStart : () => undefined}
+          onMouseMove={mouseEnable ? onMouseMove : () => undefined}
+          onMouseUp={mouseEnable ? onSwipeEnd : () => undefined}
+          onTouchStart={touchEnable ? onSwipeStart : () => undefined}
+          onTouchMove={touchEnable ? onSwipeMove : () => undefined}
+          onTouchEnd={touchEnable ? onSwipeEnd : () => undefined}
         >
           {children ? children : <div style={{ height: 150 }} />}
         </div>

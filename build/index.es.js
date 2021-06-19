@@ -101,6 +101,7 @@ var ActionSheet = React.forwardRef(function (_a, ref) {
         else if (reverse && offset < 0) {
             masterOffset.current = offset;
             animationRef.current = requestAnimationFrame(updatePosition);
+            return true;
         }
         return false;
     };
@@ -152,7 +153,7 @@ var ActionSheet = React.forwardRef(function (_a, ref) {
                     transform: "translate3d(0, 101%, 0)",
                     borderTopLeftRadius: 16,
                     borderTopRightRadius: 16,
-                })), { left: 0, width: "100%", backgroundColor: "#fbfbfb", borderTopLeftRadius: 16, borderTopRightRadius: 16 }), sheetStyle), { zIndex: zIndex + 1, transition: pressed ? "transform 0.05s linear" : sheetTransition }), onMouseDown: mouseEnable ? onMouseStart : undefined, onMouseMove: mouseEnable ? onMouseMove : undefined, onMouseUp: mouseEnable ? onSwipeEnd : undefined, onTouchStart: touchEnable ? onSwipeStart : undefined, onTouchMove: touchEnable ? onSwipeMove : undefined, onTouchEnd: touchEnable ? onSwipeEnd : undefined }, children ? children : React.createElement("div", { style: { height: 150 } }))));
+                })), { left: 0, width: "100%", backgroundColor: "#fbfbfb", borderTopLeftRadius: 16, borderTopRightRadius: 16 }), sheetStyle), { zIndex: zIndex + 1, transition: pressed ? "transform 0.05s linear" : sheetTransition }), onMouseDown: mouseEnable ? onMouseStart : function () { return undefined; }, onMouseMove: mouseEnable ? onMouseMove : function () { return undefined; }, onMouseUp: mouseEnable ? onSwipeEnd : function () { return undefined; }, onTouchStart: touchEnable ? onSwipeStart : function () { return undefined; }, onTouchMove: touchEnable ? onSwipeMove : function () { return undefined; }, onTouchEnd: touchEnable ? onSwipeEnd : function () { return undefined; } }, children ? children : React.createElement("div", { style: { height: 150 } }))));
 });
 
 export default ActionSheet;
