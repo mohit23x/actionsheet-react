@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
+import * as React from "react";
+import { ReactNode } from "react";
 export interface ActionSheetProps {
     onClose?: () => void;
     children?: ReactNode;
@@ -13,10 +13,11 @@ export interface ActionSheetProps {
     closeOnBgTap?: boolean;
     bgTransition?: string;
     sheetTransition?: string;
+    reverse?: boolean;
 }
 export interface ActionSheetRef {
     open(): void;
     close(): void;
 }
-declare const ActionSheet: React.ForwardRefExoticComponent<ActionSheetProps & React.RefAttributes<ActionSheetRef>>;
+declare const ActionSheet: React.ForwardRefExoticComponent<ActionSheetProps & React.RefAttributes<ActionSheetRef | undefined>>;
 export default ActionSheet;
