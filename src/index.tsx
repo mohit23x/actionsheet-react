@@ -20,6 +20,7 @@ export interface ActionSheetProps {
   zIndex?: number;
   closeOnBgTap?: boolean;
   bgTransition?: string;
+  className?: string;
   sheetTransition?: string;
   reverse?: boolean;
 }
@@ -46,6 +47,7 @@ const ActionSheet = React.forwardRef<
       zIndex = 998,
       closeOnBgTap = true,
       bgTransition = "opacity 0.5s ease-in-out, z-index 0.5s ease-in-out",
+      className="action-sheet",
       sheetTransition = "transform 0.3s ease-in-out",
       reverse = false,
     },
@@ -177,6 +179,7 @@ const ActionSheet = React.forwardRef<
       <Fragment>
         <div
           onClick={closeOnBgTap ? BgClick : undefined}
+          className={className}
           style={{
             position: "fixed",
             top: 0,
