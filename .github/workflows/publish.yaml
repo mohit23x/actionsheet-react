@@ -5,11 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          node-version: 10
-      - run: npm install
-      - run: npm run build
+          run: install
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
