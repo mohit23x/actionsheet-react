@@ -47,14 +47,14 @@ const ActionSheet = React.forwardRef<
       zIndex = 998,
       closeOnBgTap = true,
       bgTransition = "opacity 0.5s ease-in-out, z-index 0.5s ease-in-out",
-      className="action-sheet",
-      sheetTransition = "transform 0.3s ease-in-out",
+      className = "action-sheet",
+      sheetTransition = "transform 0.5s linear",
       reverse = false,
     },
     ref
   ): JSX.Element => {
     const [show, setShow] = useState(false);
-    const [pressed, setPressed] = useState(false);
+    const pressed = useRef(false);
     const sheetRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef(0);
     const masterOffset = useRef(0);
@@ -76,13 +76,14 @@ const ActionSheet = React.forwardRef<
 
     const requestSheetDown = React.useCallback((): boolean => {
       if (null !== sheetRef.current) {
+        sheetRef.current.style.transition = sheetTransition;
         sheetRef.current.style.transform = reverse
           ? "translate3d(0, -101%, 0)"
           : "translate3d(0, 101%, 0)";
         return true;
       }
       return false;
-    }, [reverse]);
+    }, [reverse, sheetTransition]);
 
     const requestSheetUp = React.useCallback((): boolean => {
       if (null !== sheetRef.current) {
@@ -101,8 +102,7 @@ const ActionSheet = React.forwardRef<
     }, [requestSheetDown, requestSheetUp, show]);
 
     const onSwipeMove = (event: React.TouchEvent<HTMLDivElement>): void => {
-      event.stopPropagation();
-      if (pressed) {
+      if (pressed.current) {
         const offset = event.touches[0].clientY - startY.current;
         move(offset);
       }
@@ -112,7 +112,7 @@ const ActionSheet = React.forwardRef<
       event: React.MouseEvent<HTMLDivElement, MouseEvent>
     ): void => {
       event.stopPropagation();
-      if (pressed) {
+      if (pressed.current) {
         if (reverse) {
           const offset = event.clientY - startY.current;
           move(offset);
@@ -148,6 +148,7 @@ const ActionSheet = React.forwardRef<
     };
 
     const onSwipeStart = (event: React.TouchEvent<HTMLDivElement>): void => {
+      if (sheetRef?.current) sheetRef.current.style.transition = "none";
       startY.current = event.touches[0].clientY;
       changePressed(true);
     };
@@ -155,17 +156,18 @@ const ActionSheet = React.forwardRef<
     const onMouseStart = (
       event: React.MouseEvent<HTMLDivElement, MouseEvent>
     ): void => {
+      if (sheetRef?.current) sheetRef.current.style.transition = "none";
       startY.current = event.clientY;
       changePressed(true);
     };
 
     const changePressed = (x: boolean): void => {
-      setPressed(x);
+      pressed.current = x;
     };
 
     const onSwipeEnd = (): void => {
       cancelAnimationFrame(animationRef.current);
-      setPressed(false);
+      changePressed(false);
       if (Math.abs(masterOffset.current) > threshold) {
         setShow(false);
         if (onClose) onClose();
@@ -186,12 +188,12 @@ const ActionSheet = React.forwardRef<
             left: 0,
             right: 0,
             bottom: 0,
-            background: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
             backfaceVisibility: "hidden",
-            ...bgStyle,
             transition: bgTransition,
             opacity: show ? opacity : 0,
             zIndex: show ? zIndex : -1,
+            ...bgStyle,
           }}
         ></div>
         <div
@@ -217,9 +219,9 @@ const ActionSheet = React.forwardRef<
             backgroundColor: "#fbfbfb",
             borderTopLeftRadius: 16,
             borderTopRightRadius: 16,
-            ...sheetStyle,
+            touchAction: "none",
             zIndex: zIndex + 1,
-            transition: pressed ? "transform 0.05s linear" : sheetTransition,
+            ...sheetStyle,
           }}
           onMouseDown={mouseEnable ? onMouseStart : () => undefined}
           onMouseMove={mouseEnable ? onMouseMove : () => undefined}
@@ -228,7 +230,7 @@ const ActionSheet = React.forwardRef<
           onTouchMove={touchEnable ? onSwipeMove : () => undefined}
           onTouchEnd={touchEnable ? onSwipeEnd : () => undefined}
         >
-          {children ? children : <div style={{ height: 150 }} />}
+          {children}
         </div>
       </Fragment>
     );
