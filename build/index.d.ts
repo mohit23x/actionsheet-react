@@ -12,6 +12,7 @@ export interface ActionSheetProps {
     zIndex?: number;
     closeOnBgTap?: boolean;
     bgTransition?: string;
+    className?: string;
     sheetTransition?: string;
     reverse?: boolean;
 }
