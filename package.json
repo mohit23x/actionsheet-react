@@ -10,7 +10,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@types/react": "^17.0.5",
+    "@types/react": "^18.0.15",
     "@types/react-dom": "^17.0.5",
     "react-scripts-ts": "^3.1.0",
     "rollup": "^2.10.5",
