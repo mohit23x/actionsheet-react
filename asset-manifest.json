@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/actionsheet-react/static/css/main.009222f6.css",
+    "main.js": "/actionsheet-react/static/js/main.4568f9ab.js",
+    "static/js/453.c9570f47.chunk.js": "/actionsheet-react/static/js/453.c9570f47.chunk.js",
+    "index.html": "/actionsheet-react/index.html",
+    "main.009222f6.css.map": "/actionsheet-react/static/css/main.009222f6.css.map",
+    "main.4568f9ab.js.map": "/actionsheet-react/static/js/main.4568f9ab.js.map",
+    "453.c9570f47.chunk.js.map": "/actionsheet-react/static/js/453.c9570f47.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.009222f6.css",
+    "static/js/main.4568f9ab.js"
+  ]
+}
