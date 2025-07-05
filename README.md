@@ -22,7 +22,7 @@
 
 ![demo gif](https://s7.gifyu.com/images/demo_action_sheet.gif)
 
-[Live Demo](https://mohit23x.github.io/actionsheet-react) | [CodeSandbox](https://codesandbox.io/s/actionsheet-react-v2-demo)
+[CodeSandbox](https://codesandbox.io/p/sandbox/hgx6gx)
 
 ## 📦 Installation
 
