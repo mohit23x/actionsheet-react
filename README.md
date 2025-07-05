@@ -19,10 +19,10 @@
 - 🎯 **Position Flexible**: Support for bottom and top positioned sheets
 
 ## 📺 Demo
-
-![demo gif](https://s7.gifyu.com/images/demo_action_sheet.gif)
-
 [CodeSandbox](https://codesandbox.io/p/sandbox/hgx6gx)
+
+https://github.com/user-attachments/assets/a9d4f090-e044-450d-9383-a7cee5469a87
+
 
 ## 📦 Installation
 
