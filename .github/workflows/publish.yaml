@@ -33,3 +33,33 @@ jobs:
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
+
+  deploy-example:
+    runs-on: ubuntu-latest
+    needs: publish
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: example/node_modules
+          key: ${{ runner.os }}-yarn-example-${{ hashFiles('example/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-example-
+      - name: Install dependencies (example)
+        run: cd example && yarn install --frozen-lockfile
+      - name: Build example app
+        run: cd example && yarn build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./example/build
+          publish_branch: gh-pages
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
