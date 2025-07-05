@@ -1,6 +1,6 @@
 {
   "name": "actionsheet-react",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "🌟A lightweight and flexible action sheet component for the web",
   "main": "build/index.js",
   "module": "build/index.es.js",
