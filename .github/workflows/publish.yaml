@@ -57,6 +57,8 @@ jobs:
         run: cd example && yarn install --frozen-lockfile
       - name: Build example app
         run: cd example && yarn build
+      - name: List build contents
+        run: ls -la example/build/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -66,3 +68,4 @@ jobs:
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
           enable_jekyll: false
+          force_orphan: true
