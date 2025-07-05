@@ -1,16 +1,35 @@
-on: push
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
         with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.3.0
+          node-version: 20.x
+          registry-url: "https://registry.npmjs.org/"
+      - name: Cache node_modules
+        uses: actions/cache@v4
         with:
-          cmd: build
-      - uses: JS-DevTools/npm-publish@v1
+          path: "**/node_modules"
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build package
+        run: yarn build
+      - name: Verify package
+        run: yarn type-check && yarn lint
+      - name: Publish to npm
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
